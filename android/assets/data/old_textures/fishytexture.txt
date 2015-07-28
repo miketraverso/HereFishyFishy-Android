@@ -1,0 +1,109 @@
+fishytexture.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tap@2x
+  rotate: true
+  xy: 950, 2
+  size: 69, 574
+  orig: 576, 69
+  offset: 0, 0
+  index: -1
+buy@2x
+  rotate: true
+  xy: 397, 532
+  size: 51, 138
+  orig: 226, 113
+  offset: 46, 34
+  index: -1
+foreground@2x
+  rotate: false
+  xy: 2, 2
+  size: 640, 312
+  orig: 640, 312
+  offset: 0, 0
+  index: -1
+fish-dead@2x
+  rotate: false
+  xy: 187, 930
+  size: 120, 91
+  orig: 120, 91
+  offset: 0, 0
+  index: -1
+ok@2x
+  rotate: false
+  xy: 230, 316
+  size: 98, 55
+  orig: 226, 113
+  offset: 58, 30
+  index: -1
+removeads@2x
+  rotate: false
+  xy: 309, 930
+  size: 220, 87
+  orig: 226, 113
+  offset: 4, 12
+  index: -1
+rate@2x
+  rotate: true
+  xy: 890, 384
+  size: 51, 184
+  orig: 226, 113
+  offset: 22, 34
+  index: -1
+title-fancy@2x
+  rotate: true
+  xy: 644, 2
+  size: 304, 380
+  orig: 380, 304
+  offset: 0, 0
+  index: -1
+share@2x
+  rotate: false
+  xy: 2, 316
+  size: 226, 55
+  orig: 226, 113
+  offset: 0, 30
+  index: -1
+fish-0@2x
+  rotate: false
+  xy: 397, 437
+  size: 120, 93
+  orig: 120, 93
+  offset: 0, 0
+  index: -1
+obstacle-weeds@2x
+  rotate: false
+  xy: 2, 384
+  size: 183, 622
+  orig: 183, 622
+  offset: 0, 0
+  index: -1
+fish-1@2x
+  rotate: true
+  xy: 531, 437
+  size: 93, 120
+  orig: 120, 93
+  offset: 0, 0
+  index: -1
+button@2x
+  rotate: false
+  xy: 397, 316
+  size: 238, 119
+  orig: 238, 119
+  offset: 0, 0
+  index: -1
+gameOver@2x
+  rotate: false
+  xy: 637, 384
+  size: 251, 149
+  orig: 251, 149
+  offset: 0, 0
+  index: -1
+scorecard@2x
+  rotate: true
+  xy: 187, 384
+  size: 208, 544
+  orig: 544, 208
+  offset: 0, 0
+  index: -1
