@@ -11,50 +11,59 @@ public class Seaweed extends ScrollingBackground {
 	private int kSPACE_BETWEEN_PIPES = 17;
 
 	private Random _randomNumber;
-    private Rectangle barUp, barDown;
+    private Rectangle _barUp, _barDown;
+    private boolean _isScored = false;
 
 	public Seaweed(float x, float y, int width, int height, float scrollSpeed, float groundLevel) {
 
         super(x, y, width, height, scrollSpeed, groundLevel);
 		_randomNumber = new Random();
-        barUp = new Rectangle();
-        barDown = new Rectangle();
+        _barUp = new Rectangle();
+        _barDown = new Rectangle();
 	}
-	
-	@Override
+
+    public void onRestart(float x, float scrollSpeed) {
+
+        _velocity.x = scrollSpeed;
+        reset(x);
+    }
+
+    @Override
     public void update(float delta) {
 
         super.update(delta);
-        barUp.set(_position.x, _position.y, _width, _height);
-        barDown.set(_position.x,
-                    _position.y + _height + VERTICAL_GAP,
-                    _width,
-                    _groundLevel + 66 - ( /*_position.y + */ _height + VERTICAL_GAP));
+        _barUp.set(_position.x, _position.y, _width, _height);
+        _barDown.set(_position.x,
+                        _position.y + _height + VERTICAL_GAP,
+                        _width,
+                        _groundLevel + 66 - (_height + VERTICAL_GAP));
     }
 
 	@Override
 	public void reset(float newXPosition) {
 
         super.reset(newXPosition);
-		_height = _randomNumber.nextInt(90) + kSPACE_BETWEEN_PIPES;	
-	}
+		_height = _randomNumber.nextInt(90) + kSPACE_BETWEEN_PIPES;
+        _isScored = false;
+    }
 	
 	public boolean collides (Fishy fishy) {
 
         if (_position.x < fishy.getX() + fishy.getWidth()) {
 
-            System.out.println();
-            System.out.println("Seaweed: " + _position.x);
-            System.out.println("Fishy: " + fishy.getX() + fishy.getWidth() + " x: " + fishy.getX() + " width: " + fishy.getWidth());
-
-            System.out.println(Intersector.overlaps(fishy.getBoundingCircle(), barUp));
-            System.out.println(Intersector.overlaps(fishy.getBoundingCircle(), barDown));
-            System.out.println();
-
-            return (Intersector.overlaps(fishy.getBoundingCircle(), barUp) ||
-            		Intersector.overlaps(fishy.getBoundingCircle(), barDown));
+            return (Intersector.overlaps(fishy.getBoundingCircle(), _barUp) ||
+            		Intersector.overlaps(fishy.getBoundingCircle(), _barDown));
         }
-        
+
         return false;
 	}
+
+    public boolean isScored() {
+        return _isScored;
+    }
+
+    public void setScored(boolean scored) {
+
+        _isScored = scored;
+    }
 }

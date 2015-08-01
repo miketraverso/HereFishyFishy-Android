@@ -34,8 +34,7 @@ public class GameScreen implements Screen {
 		_world.update(delta);
 		_renderer.render(delta);
 		
-        Gdx.input.setInputProcessor(new InputHandler(_world.getFishy()));
-
+        Gdx.input.setInputProcessor(new InputHandler(_world));
 	}
 
     @Override

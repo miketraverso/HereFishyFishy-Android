@@ -1,16 +1,20 @@
 package com.traversoft.hff.GameObjects;
 
+import com.traversoft.hff.HFFWorld.HFFWorld;
 import com.traversoft.hff.utils.AssetLoader;
 
 public class ScrollingBackgroundHandler {
 
 	private SeaFloor _floor, _floor2;
 	private Seaweed _weed1, _weed2, _weed3;
-	
+	private HFFWorld _world;
+
     public static final int kScrollingSpeed = -59;
     public static final int kSeaweedGap = 75;
 
-    public ScrollingBackgroundHandler(float yPos) {
+    public ScrollingBackgroundHandler(HFFWorld world, float yPos) {
+
+        _world = world;
     	_floor = new SeaFloor(0, yPos, 320, 156, kScrollingSpeed, yPos); //(0.0, yPos, 143, 11, kScrollingSpeed);
         _floor2 = new SeaFloor(_floor.getTailX(), yPos, 320, 156, kScrollingSpeed, yPos);
 
@@ -55,10 +59,35 @@ public class ScrollingBackgroundHandler {
 
     // Return true if ANY pipe hits the bird.
     public boolean collides(Fishy fishy) {
+
+        if (!_weed1.isScored() && _weed1.getX() + (_weed1.getWidth() / 2) < fishy.getX() + fishy.getWidth()) {
+
+            addScore(1);
+            _weed1.setScored(true);
+            AssetLoader.ding.play();
+        }
+        else if (!_weed2.isScored() && _weed2.getX() + (_weed2.getWidth() / 2) < fishy.getX() + fishy.getWidth()) {
+
+            addScore(1);
+            _weed2.setScored(true);
+            AssetLoader.ding.play();
+        }
+        else if (!_weed3.isScored() && _weed3.getX() + (_weed3.getWidth() / 2) < fishy.getX() + fishy.getWidth()) {
+
+            addScore(1);
+            _weed3.setScored(true);
+            AssetLoader.ding.play();
+
+        }
+
        return (_weed1.collides(fishy) || _weed2.collides(fishy) || _weed3.collides(fishy) ||
     		   _floor.collides(fishy) || _floor2.collides(fishy));
     }
-    
+
+    private void addScore(int increment) {
+
+        _world.addScore(increment);
+    }
     public SeaFloor getSeaFloor() {
 		return _floor;
 	}
@@ -78,5 +107,13 @@ public class ScrollingBackgroundHandler {
 		return _weed3;
 	}
 
+    public void onRestart() {
+
+        _floor.onRestart(0, kScrollingSpeed);
+        _floor2.onRestart(_floor.getTailX(), kScrollingSpeed);
+        _weed1.onRestart(210, kScrollingSpeed);
+        _weed2.onRestart(_weed1.getTailX() + kSeaweedGap, kScrollingSpeed);
+        _weed3.onRestart(_weed2.getTailX() + kSeaweedGap, kScrollingSpeed);
+    }
     
 }

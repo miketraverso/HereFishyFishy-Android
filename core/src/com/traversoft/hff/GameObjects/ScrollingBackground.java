@@ -59,4 +59,5 @@ public class ScrollingBackground {
 	public boolean isScrolledLeft() {
 		return _isScrolledLeft;
 	}
+
 }

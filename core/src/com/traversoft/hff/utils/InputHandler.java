@@ -2,16 +2,19 @@ package com.traversoft.hff.utils;
 
 import com.badlogic.gdx.InputProcessor;
 import com.traversoft.hff.GameObjects.Fishy;
+import com.traversoft.hff.HFFWorld.HFFWorld;
 
 public class InputHandler implements InputProcessor
 {
-	private Fishy fishy;
-	
-	public InputHandler (Fishy fishy)
-	{
-		this.fishy = fishy;
+	private Fishy _fishy;
+	private HFFWorld _world;
+
+	public InputHandler(HFFWorld world) {
+
+		_world = world;
+		_fishy = world.getFishy();
 	}
-	
+
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub
@@ -32,8 +35,19 @@ public class InputHandler implements InputProcessor
 	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		fishy.onClick();
-		AssetLoader.bubbleUp.play();
+
+		if (_world.isReady()) {
+
+			_world.start();
+		}
+
+		_fishy.onClick();
+
+		if (_world.isGameOver()) {
+
+			_world.restart();
+		}
+
 		return true;
 	}
 	
