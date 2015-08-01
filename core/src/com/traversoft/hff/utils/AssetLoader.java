@@ -20,8 +20,8 @@ public class AssetLoader {
     public static TextureRegion fishyFlapUpTexture, fishyFlapDownTexture, deadFishyTexture, topSeaweedTexture, bottomSeaweedTexture;
     public static Sound dead, bubbleUp, crash, gameOver, ding;
     public static TextureAtlas atlas;
-    public static BitmapFont font;
-    public static Sprite titleFancy, tapToPlay;
+    public static BitmapFont font, yellow_font;
+    public static Sprite titleFancy, tapToPlay, scorecard;
     public static Preferences prefs;
 
     public static void load() {
@@ -30,6 +30,9 @@ public class AssetLoader {
                               Gdx.files.internal("data/font/font-white.png"),
                               false);
         font.getData().setScale(.30f, -.30f);
+
+        yellow_font = new BitmapFont(Gdx.files.internal("data/font/font-yellow.fnt"));
+        yellow_font.getData().setScale(.30f, -.30f);
 
         atlas = new TextureAtlas(Gdx.files.internal("data/textures/fish.pack"));
         seafloorSprite = atlas.createSprite("foreground");
@@ -44,6 +47,9 @@ public class AssetLoader {
         tapToPlay = atlas.createSprite("tap");
         tapToPlay.flip(false, true);
         tapToPlay.setScale(0.4f,0.4f);
+
+        scorecard  = atlas.createSprite("scorecard");
+        scorecard.flip(false, true);
 
         texture = new Texture(Gdx.files.internal("data/texture.png"));
         texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
@@ -79,17 +85,6 @@ public class AssetLoader {
         if (!prefs.contains("highScore")) {
             prefs.putInteger("highScore", 0);
         }
-    }
-
-    // Receives an integer and maps it to the String highScore in prefs
-    public static void setHighScore(int val) {
-        prefs.putInteger("highScore", val);
-        prefs.flush();
-    }
-
-    // Retrieves the current high score
-    public static int getHighScore() {
-        return prefs.getInteger("highScore");
     }
 
     public static void dispose() {

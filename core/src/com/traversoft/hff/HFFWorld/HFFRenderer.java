@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -37,7 +38,8 @@ public class HFFRenderer {
     private Animation _fishyFlapAnimation;
     private TextureRegion _fishyFlapDownTexture, _fishyFlapUpTexture, _deadFishyTexture, _bottomSeaweedTexture, _topSeaweedTexture;
 
-    private Sprite _titleFancy, _tapToPlay;
+    private Sprite _titleFancy, _tapToPlay, _scorecard;
+    private boolean isGameOverEvaluated = false;
 
 	public HFFRenderer(HFFWorld world, int gameHeight, int midPointY)
 	{
@@ -79,6 +81,7 @@ public class HFFRenderer {
         _seaFloorSprite = AssetLoader.seafloorSprite;
         _tapToPlay = AssetLoader.tapToPlay;
         _titleFancy = AssetLoader.titleFancy;
+        _scorecard = AssetLoader.scorecard;
     }
 
 	public void render(float runTime) {		
@@ -138,25 +141,56 @@ public class HFFRenderer {
             _batcher.draw(_titleFancy, 18, 20, 100, 85);
             _batcher.draw(_tapToPlay,  18, 10 + 20 + 85, 100, 12);
         }
-        else {
+        else if (_world.isGameOver()) {
 
-            if (_world.isGameOver()) {
-
-                AssetLoader.font.draw(_batcher, "Game Over".toUpperCase(), 14, 35);
-                AssetLoader.font.draw(_batcher, "Try again?".toUpperCase(), 24, 75);
+            String score = String.format("%d", _world.getScore());
+            BitmapFont font;
+            if (_world.isNewHighScore()) {
+                font = AssetLoader.yellow_font;
             }
+            else {
+                font = AssetLoader.font;
+            }
+
+            _batcher.draw(_scorecard, 8, 33, 120, 50);
+            if (score.length() < 3) {
+                AssetLoader.font.draw(_batcher, score, (136 / 4) - (4 * score.length()), 55);
+            }
+            else if (score.length() >= 3) {
+                AssetLoader.font.draw(_batcher, score, (136 / 4) - (5 * score.length()), 55);
+            }
+
+            String highScore = String.format("%d", _world.getHighScore());
+            boolean isNewHighScore = _world.getScore() > _world.getHighScore();
+            if (isNewHighScore) {
+
+                _world.setHighScore(_world.getScore());
+            }
+
+            if (highScore.length() < 2) {
+
+                font.draw(_batcher, highScore, (136 / 8 * 5) + (3 * highScore.length()), 55);
+            }
+            else if (highScore.length() == 2) {
+
+                font.draw(_batcher, highScore, (136 / 8 * 5) + (1 * highScore.length()), 55);
+            }
+            else if (highScore.length() == 3) {
+
+                font.draw(_batcher, highScore, (136 / 8 * 5) - (2 * highScore.length()), 55);
+            }
+            else {
+                font.draw(_batcher, highScore, (136 / 8 * 5) - (3 * highScore.length()), 55);
+            }
+
+        }
+        else {
 
             String score = String.format("%d", _world.getScore());
             AssetLoader.font.draw(_batcher, score, (136 / 2) - (7 * score.length()), 12);
         }
 
         _batcher.end();
-
-//        // Collision
-//        _shapeRenderer.begin(ShapeType.Filled);
-//        _shapeRenderer.setColor(Color.RED);
-//        _shapeRenderer.circle(_fishy.getBoundingCircle().x, _fishy.getBoundingCircle().y, _fishy.getBoundingCircle().radius);
-//        _shapeRenderer.end();
     }
 	
 	private void drawForeground() {
@@ -209,33 +243,5 @@ public class HFFRenderer {
                         _seaweed3.getY() + _seaweed3.getHeight() + Seaweed.VERTICAL_GAP,
         		        _seaweed3.getWidth(),
                         _midPointY + 66 - (_seaweed3.getHeight() + Seaweed.VERTICAL_GAP));
-
-//        _shapeRenderer.begin(ShapeType.Filled);
-//        _shapeRenderer.setColor(Color.GREEN);
-//        _shapeRenderer.rect(_seaweed1.getX(), _seaweed1.getY(), _seaweed1.getWidth(), _seaweed1.getHeight());
-//        _shapeRenderer.end();
-//        _shapeRenderer.begin(ShapeType.Filled);
-//        _shapeRenderer.setColor(Color.GREEN);
-//        _shapeRenderer.rect(_seaweed1.getX(), _seaweed1.getY() + _seaweed1.getHeight() + 45, _seaweed1.getWidth(), _midPointY + 66 - (_seaweed1.getHeight() + 45));
-//        _shapeRenderer.end();
-//
-//        _shapeRenderer.begin(ShapeType.Filled);
-//        _shapeRenderer.setColor(Color.GREEN);
-//        _shapeRenderer.rect(_seaweed2.getX(), _seaweed2.getY(), _seaweed2.getWidth(), _seaweed2.getHeight());
-//        _shapeRenderer.end();
-//        _shapeRenderer.begin(ShapeType.Filled);
-//        _shapeRenderer.setColor(Color.GREEN);
-//        _shapeRenderer.rect(_seaweed2.getX(), _seaweed2.getY() + _seaweed2.getHeight() + 45, _seaweed2.getWidth(), _midPointY + 66 - (_seaweed2.getHeight() + 45));
-//        _shapeRenderer.end();
-//
-//        _shapeRenderer.begin(ShapeType.Filled);
-//        _shapeRenderer.setColor(Color.GREEN);
-//        _shapeRenderer.rect(_seaweed3.getX(), _seaweed3.getY(), _seaweed3.getWidth(), _seaweed3.getHeight());
-//        _shapeRenderer.end();
-//        _shapeRenderer.begin(ShapeType.Filled);
-//        _shapeRenderer.setColor(Color.GREEN);
-//        _shapeRenderer.rect(_seaweed3.getX(), _seaweed3.getY() + _seaweed3.getHeight() + 45, _seaweed3.getWidth(), _midPointY + 66 - (_seaweed3.getHeight() + 45));
-//        _shapeRenderer.end();
-
     }
 }

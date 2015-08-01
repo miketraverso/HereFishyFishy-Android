@@ -1,12 +1,11 @@
 package com.traversoft.hff.HFFWorld;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.traversoft.hff.GameObjects.Fishy;
 import com.traversoft.hff.GameObjects.ScrollingBackgroundHandler;
-import com.traversoft.hff.utils.AssetLoader;
-
-import org.lwjgl.Sys;
 
 public class HFFWorld {
 
@@ -21,6 +20,9 @@ public class HFFWorld {
 	private int _score = 0;
     private GameState _currentState;
     private int _midPointY;
+    private Preferences _prefs;
+    private boolean _isNewHighScore;
+
     public HFFWorld (int midPointY) {
 
         _currentState = GameState.READY;
@@ -28,6 +30,8 @@ public class HFFWorld {
     	_scroller = new ScrollingBackgroundHandler(this, midPointY + 55);
 		_ground = new Rectangle(0, midPointY + 55, 136, 11);
         _midPointY = midPointY;
+        _prefs = Gdx.app.getPreferences("HFF");
+        _isNewHighScore = false;
 	}
 
     public void update (float delta) {
@@ -48,6 +52,7 @@ public class HFFWorld {
 
     public void updateReady (float delta) {
 
+        _isNewHighScore = false;
     }
 
 	public void updateRunning(float delta) {
@@ -98,6 +103,25 @@ public class HFFWorld {
 
 		_score += increment;
 	}
+
+    public void setHighScore(int score) {
+
+        Integer highScore = _prefs.getInteger("highScore", 0);
+        if (highScore < score) {
+
+            _prefs.putInteger("highScore", score);
+            _isNewHighScore = true;
+            _prefs.flush();
+        }
+    }
+
+    public boolean isNewHighScore () {
+         return _isNewHighScore;
+    }
+
+    public int getHighScore() {
+        return _prefs.getInteger("highScore", 0);
+    }
 
     public boolean isReady() {
 
