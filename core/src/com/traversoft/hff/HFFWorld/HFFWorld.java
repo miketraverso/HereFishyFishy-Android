@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.traversoft.hff.GameObjects.Fishy;
 import com.traversoft.hff.GameObjects.ScrollingBackgroundHandler;
+import com.traversoft.hff.HereFishyFishyMain;
 
 public class HFFWorld {
 
@@ -22,9 +23,11 @@ public class HFFWorld {
     private int _midPointY;
     private Preferences _prefs;
     private boolean _isNewHighScore;
+    private HereFishyFishyMain _game;
 
-    public HFFWorld (int midPointY) {
+    public HFFWorld (int midPointY, HereFishyFishyMain game) {
 
+        _game = game;
         _currentState = GameState.READY;
     	_fishy = new Fishy(33, midPointY - 150, 22, 17);
     	_scroller = new ScrollingBackgroundHandler(this, midPointY + 55);
@@ -86,7 +89,9 @@ public class HFFWorld {
         }
 	}
 
-	public Fishy getFishy() {
+    public HereFishyFishyMain getGame() { return _game; }
+
+    public Fishy getFishy() {
         return _fishy;
     }
 	

@@ -19,70 +19,98 @@ title-fancy
   index: -1
 foreground
   rotate: false
-  xy: 643, 561
+  xy: 643, 560
   size: 320, 156
   orig: 320, 156
   offset: 0, 0
   index: -1
 title
   rotate: false
-  xy: 643, 322
+  xy: 643, 320
   size: 298, 238
   orig: 298, 238
   offset: 0, 0
   index: -1
 obstacle-weeds-bottom
   rotate: false
-  xy: 643, 10
+  xy: 643, 7
   size: 92, 311
   orig: 92, 311
   offset: 0, 0
   index: -1
 obstacle-weeds-top
   rotate: false
-  xy: 737, 10
+  xy: 737, 7
   size: 92, 311
   orig: 92, 311
   offset: 0, 0
   index: -1
 crab-1
   rotate: false
-  xy: 831, 204
+  xy: 831, 201
   size: 190, 117
   orig: 190, 117
   offset: 0, 0
   index: -1
 crab-0
   rotate: false
-  xy: 831, 87
+  xy: 831, 83
   size: 190, 116
   orig: 190, 116
   offset: 0, 0
   index: -1
+nextButton
+  rotate: false
+  xy: 831, 1
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+nextButtonDown
+  rotate: false
+  xy: 913, 1
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+nextButtonUp
+  rotate: false
+  xy: 943, 478
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
+playButton
+  rotate: false
+  xy: 943, 396
+  size: 80, 80
+  orig: 80, 80
+  offset: 0, 0
+  index: -1
 tap
   rotate: false
-  xy: 1, 120
+  xy: 1, 119
   size: 576, 69
   orig: 576, 69
   offset: 0, 0
   index: -1
-button-dark
+ok
   rotate: false
-  xy: 1, 0
-  size: 238, 119
-  orig: 238, 119
+  xy: 1, 4
+  size: 226, 113
+  orig: 226, 113
   offset: 0, 0
   index: -1
-button-yellow
+okDown
   rotate: false
-  xy: 241, 0
-  size: 238, 119
-  orig: 238, 119
+  xy: 229, 4
+  size: 226, 113
+  orig: 226, 113
   offset: 0, 0
   index: -1
 clown-0
   rotate: false
-  xy: 481, 24
+  xy: 457, 22
   size: 120, 95
   orig: 120, 95
   offset: 0, 0
@@ -94,252 +122,266 @@ filter: Nearest,Nearest
 repeat: none
 scorecard
   rotate: false
-  xy: 1, 799
+  xy: 1, 815
   size: 544, 208
   orig: 544, 208
   offset: 0, 0
   index: -1
 gameOver
   rotate: false
-  xy: 1, 723
+  xy: 1, 738
   size: 520, 75
   orig: 520, 75
   offset: 0, 0
   index: -1
-button
+button-dark
   rotate: false
-  xy: 547, 888
+  xy: 547, 904
   size: 238, 119
   orig: 238, 119
   offset: 0, 0
   index: -1
-ok
+button-yellow
   rotate: false
-  xy: 1, 609
+  xy: 1, 617
+  size: 238, 119
+  orig: 238, 119
+  offset: 0, 0
+  index: -1
+button
+  rotate: false
+  xy: 1, 496
+  size: 238, 119
+  orig: 238, 119
+  offset: 0, 0
+  index: -1
+okUp
+  rotate: false
+  xy: 787, 910
   size: 226, 113
   orig: 226, 113
   offset: 0, 0
   index: -1
 rate
   rotate: false
-  xy: 787, 894
+  xy: 241, 623
   size: 226, 113
   orig: 226, 113
   offset: 0, 0
   index: -1
 share
   rotate: false
-  xy: 1, 495
+  xy: 1, 381
   size: 226, 113
   orig: 226, 113
   offset: 0, 0
   index: -1
 play
   rotate: false
-  xy: 229, 652
+  xy: 547, 832
   size: 239, 70
   orig: 239, 70
   offset: 0, 0
   index: -1
 clown-1
   rotate: false
-  xy: 1, 399
+  xy: 241, 526
   size: 120, 95
   orig: 120, 95
   offset: 0, 0
   index: -1
 clown-dead
   rotate: false
-  xy: 229, 556
+  xy: 1, 284
   size: 120, 95
   orig: 120, 95
   offset: 0, 0
   index: -1
 oldfish-dead
   rotate: false
-  xy: 1, 303
+  xy: 1, 187
   size: 120, 95
   orig: 120, 95
   offset: 0, 0
   index: -1
 oldfish-0
   rotate: false
-  xy: 1, 208
+  xy: 1, 91
   size: 120, 94
   orig: 120, 94
   offset: 0, 0
   index: -1
 oldfish-1
   rotate: false
-  xy: 1, 113
+  xy: 363, 527
   size: 120, 94
   orig: 120, 94
   offset: 0, 0
   index: -1
 fish-0
   rotate: false
-  xy: 1, 19
+  xy: 123, 286
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
 fish-1
   rotate: false
-  xy: 351, 558
+  xy: 123, 191
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
-catfish-0
-  rotate: false
-  xy: 547, 797
-  size: 120, 90
-  orig: 120, 90
-  offset: 0, 0
-  index: -1
-catfish-1
-  rotate: false
-  xy: 669, 796
-  size: 120, 91
-  orig: 120, 91
-  offset: 0, 0
-  index: -1
 girl-1
   rotate: false
-  xy: 791, 800
+  xy: 123, 96
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
 goldfish-0
   rotate: false
-  xy: 123, 401
+  xy: 123, 1
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
+catfish-0
+  rotate: false
+  xy: 788, 818
+  size: 120, 90
+  orig: 120, 90
+  offset: 0, 0
+  index: -1
+catfish-1
+  rotate: false
+  xy: 241, 433
+  size: 120, 91
+  orig: 120, 91
+  offset: 0, 0
+  index: -1
+girl-0
+  rotate: false
+  xy: 363, 433
+  size: 120, 92
+  orig: 120, 92
+  offset: 0, 0
+  index: -1
 red-1
   rotate: false
-  xy: 123, 307
+  xy: 245, 338
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
 super-fish-dead
   rotate: false
-  xy: 123, 213
+  xy: 245, 243
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
 wood-fish-1
   rotate: false
-  xy: 123, 119
+  xy: 245, 148
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
-girl-0
-  rotate: false
-  xy: 123, 26
-  size: 120, 92
-  orig: 120, 92
-  offset: 0, 0
-  index: -1
-catfish-dead
-  rotate: false
-  xy: 523, 706
-  size: 120, 90
-  orig: 120, 90
-  offset: 0, 0
-  index: -1
-fish-dead
-  rotate: false
-  xy: 645, 704
-  size: 120, 91
-  orig: 120, 91
-  offset: 0, 0
-  index: -1
 goldfish-1
   rotate: false
-  xy: 245, 463
+  xy: 245, 54
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
 red-0
   rotate: false
-  xy: 245, 370
+  xy: 367, 339
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
 super-fish-0
   rotate: false
-  xy: 245, 277
+  xy: 367, 245
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
 super-fish-1
   rotate: false
-  xy: 245, 184
+  xy: 367, 151
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
 wood-fish-0
   rotate: false
-  xy: 245, 91
+  xy: 367, 57
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
+fish-dead
+  rotate: false
+  xy: 469, 645
+  size: 120, 91
+  orig: 120, 91
+  offset: 0, 0
+  index: -1
 girl-dead
   rotate: false
-  xy: 367, 466
+  xy: 485, 552
   size: 120, 91
   orig: 120, 91
   offset: 0, 0
   index: -1
 goldfish-dead
   rotate: false
-  xy: 367, 374
+  xy: 485, 459
   size: 120, 91
   orig: 120, 91
   offset: 0, 0
   index: -1
 red-dead
   rotate: false
-  xy: 367, 282
+  xy: 489, 366
   size: 120, 91
   orig: 120, 91
   offset: 0, 0
   index: -1
 wood-fish-dead
   rotate: false
-  xy: 367, 190
+  xy: 489, 273
   size: 120, 91
   orig: 120, 91
   offset: 0, 0
   index: -1
+catfish-dead
+  rotate: false
+  xy: 489, 181
+  size: 120, 90
+  orig: 120, 90
+  offset: 0, 0
+  index: -1
 stinky-0
   rotate: false
-  xy: 367, 99
+  xy: 489, 89
   size: 120, 90
   orig: 120, 90
   offset: 0, 0
   index: -1
 stinky-1
   rotate: false
-  xy: 245, 0
+  xy: 547, 740
   size: 120, 90
   orig: 120, 90
   offset: 0, 0
   index: -1
 stinky-dead
   rotate: false
-  xy: 367, 9
+  xy: 591, 649
   size: 120, 89
   orig: 120, 89
   offset: 0, 0

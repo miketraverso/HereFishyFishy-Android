@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,9 +12,8 @@ import com.traversoft.hff.GameObjects.Fishy;
 import com.traversoft.hff.GameObjects.ScrollingBackgroundHandler;
 import com.traversoft.hff.GameObjects.SeaFloor;
 import com.traversoft.hff.GameObjects.Seaweed;
+import com.traversoft.hff.HFFCharacterScreen.CharacterSelectScreen;
 import com.traversoft.hff.utils.AssetLoader;
-
-import org.lwjgl.Sys;
 
 public class HFFRenderer {
 
@@ -72,10 +70,10 @@ public class HFFRenderer {
 
     private void initAssets() {
 
-        _fishyFlapAnimation = AssetLoader.fishyFlapAnimation;
-        _fishyFlapDownTexture = AssetLoader.fishyFlapDownTexture;
-        _fishyFlapUpTexture = AssetLoader.fishyFlapUpTexture;
-        _deadFishyTexture = AssetLoader.deadFishyTexture;
+        _fishyFlapAnimation = AssetLoader.selectedFishAnimation;
+        _fishyFlapDownTexture = AssetLoader.selectedFishFlapDownTexture;
+        _fishyFlapUpTexture = AssetLoader.selectedFishFlapUpTexture;
+        _deadFishyTexture = AssetLoader.selectedFishDeadTexture;
         _bottomSeaweedTexture = AssetLoader.bottomSeaweedTexture;
         _topSeaweedTexture = AssetLoader.topSeaweedTexture;
         _seaFloorSprite = AssetLoader.seafloorSprite;
@@ -144,45 +142,47 @@ public class HFFRenderer {
         }
         else if (_world.isGameOver()) {
 
-            String score = String.format("%d", _world.getScore());
-            BitmapFont font;
-            if (_world.isNewHighScore()) {
-                font = AssetLoader.yellow_font;
-            }
-            else {
-                font = AssetLoader.font;
-            }
+            _world.getGame().setScreen(new CharacterSelectScreen(_world.getGame()));
 
-            _batcher.draw(_scorecard, 8, 33, 120, 50);
-            if (score.length() < 3) {
-                AssetLoader.font.draw(_batcher, score, (136 / 4) - (4 * score.length()), 55);
-            }
-            else if (score.length() >= 3) {
-                AssetLoader.font.draw(_batcher, score, (136 / 4) - (5 * score.length()), 55);
-            }
-
-            String highScore = String.format("%d", _world.getHighScore());
-            boolean isNewHighScore = _world.getScore() > _world.getHighScore();
-            if (isNewHighScore) {
-
-                _world.setHighScore(_world.getScore());
-            }
-
-            if (highScore.length() < 2) {
-
-                font.draw(_batcher, highScore, (136 / 8 * 5) + (3 * highScore.length()), 55);
-            }
-            else if (highScore.length() == 2) {
-
-                font.draw(_batcher, highScore, (136 / 8 * 5) + (1 * highScore.length()), 55);
-            }
-            else if (highScore.length() == 3) {
-
-                font.draw(_batcher, highScore, (136 / 8 * 5) - (2 * highScore.length()), 55);
-            }
-            else {
-                font.draw(_batcher, highScore, (136 / 8 * 5) - (3 * highScore.length()), 55);
-            }
+//            String score = String.format("%d", _world.getScore());
+//            BitmapFont font;
+//            if (_world.isNewHighScore()) {
+//                font = AssetLoader.yellow_font;
+//            }
+//            else {
+//                font = AssetLoader.font;
+//            }
+//
+//            _batcher.draw(_scorecard, 8, 33, 120, 50);
+//            if (score.length() < 3) {
+//                AssetLoader.font.draw(_batcher, score, (136 / 4) - (4 * score.length()), 55);
+//            }
+//            else if (score.length() >= 3) {
+//                AssetLoader.font.draw(_batcher, score, (136 / 4) - (5 * score.length()), 55);
+//            }
+//
+//            String highScore = String.format("%d", _world.getHighScore());
+//            boolean isNewHighScore = _world.getScore() > _world.getHighScore();
+//            if (isNewHighScore) {
+//
+//                _world.setHighScore(_world.getScore());
+//            }
+//
+//            if (highScore.length() < 2) {
+//
+//                font.draw(_batcher, highScore, (136 / 8 * 5) + (3 * highScore.length()), 55);
+//            }
+//            else if (highScore.length() == 2) {
+//
+//                font.draw(_batcher, highScore, (136 / 8 * 5) + (1 * highScore.length()), 55);
+//            }
+//            else if (highScore.length() == 3) {
+//
+//                font.draw(_batcher, highScore, (136 / 8 * 5) - (2 * highScore.length()), 55);
+//            }
+//            else {
+//                font.draw(_batcher, highScore, (136 / 8 * 5) - (3 * highScore.length()), 55);
+//            }
 
         }
         else {

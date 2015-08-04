@@ -11,7 +11,7 @@ public class HereFishyFishyMain extends Game {
 
 		System.out.println("HFFGame created!");
 		AssetLoader.load();
-		setScreen(new GameScreen());
+		setScreen(new GameScreen(this));
 	}
 
 	@Override
