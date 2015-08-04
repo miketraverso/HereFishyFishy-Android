@@ -15,8 +15,8 @@ public class ScrollingBackgroundHandler {
     public ScrollingBackgroundHandler(HFFWorld world, float yPos) {
 
         _world = world;
-    	_floor = new SeaFloor(0, yPos, 320, 156, kScrollingSpeed, yPos); //(0.0, yPos, 143, 11, kScrollingSpeed);
-        _floor2 = new SeaFloor(_floor.getTailX(), yPos, 320, 156, kScrollingSpeed, yPos);
+    	_floor = new SeaFloor(0, yPos, 233, 125, kScrollingSpeed, yPos); //(0.0, yPos, 143, 11, kScrollingSpeed);
+        _floor2 = new SeaFloor(_floor.getTailX(), yPos, 233, 125, kScrollingSpeed, yPos);
 
     	_weed1 = new Seaweed(210, 0, 22, 60, kScrollingSpeed, yPos);
     	_weed2 = new Seaweed(_weed1.getTailX() + kSeaweedGap, 0, 22, 60, kScrollingSpeed, yPos);

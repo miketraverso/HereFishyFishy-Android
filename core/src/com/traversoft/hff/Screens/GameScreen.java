@@ -24,7 +24,6 @@ public class GameScreen implements Screen {
 
 		_world = new HFFWorld(midPointY);
 		_renderer = new HFFRenderer(_world, (int)	gameHeight, midPointY);
-
 	}
 	
 	@Override

@@ -85,7 +85,8 @@ public class HFFRenderer {
     }
 
 	public void render(float runTime) {		
-		
+
+
 		// Fill the entire screen with black, to prevent potential flickering.
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

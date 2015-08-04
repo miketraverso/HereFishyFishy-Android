@@ -11,7 +11,7 @@ public class HFFWorld {
 
     public enum GameState {
 
-        READY, RUNNING, GAMEOVER, HIGHSCORE
+        READY, RUNNING, GAMEOVER, HIGHSCORE, CHOOSEFISH
     }
 
     private Fishy _fishy;
@@ -128,6 +128,11 @@ public class HFFWorld {
         return _currentState == GameState.READY;
     }
 
+    public boolean isChoosingFish () {
+
+        return _currentState == GameState.READY.CHOOSEFISH;
+    }
+
     public boolean isGameOver() {
 
         return _currentState == GameState.GAMEOVER;
@@ -154,6 +159,5 @@ public class HFFWorld {
         _fishy.onRestart(33, _midPointY - 150);
         _scroller.onRestart();
         _currentState = GameState.READY;
-
     }
 }

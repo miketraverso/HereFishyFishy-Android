@@ -1,14 +1,8 @@
 package com.traversoft.hff;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.traversoft.hff.utils.AssetLoader;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import com.traversoft.hff.Screens.GameScreen;
+import com.traversoft.hff.utils.AssetLoader;
 
 public class HereFishyFishyMain extends Game {
 

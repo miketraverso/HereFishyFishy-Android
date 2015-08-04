@@ -18,7 +18,7 @@ public class AssetLoader {
     public static Sprite seafloorSprite, backgroundSprite;
     public static Animation fishyFlapAnimation;
     public static TextureRegion fishyFlapUpTexture, fishyFlapDownTexture, deadFishyTexture, topSeaweedTexture, bottomSeaweedTexture;
-    public static Sound dead, bubbleUp, crash, gameOver, ding;
+    public static Sound dead, bubbleUp, crash, gameOver, backgroundSound, ding;
     public static TextureAtlas atlas;
     public static BitmapFont font, yellow_font;
     public static Sprite titleFancy, tapToPlay, scorecard;
@@ -79,7 +79,7 @@ public class AssetLoader {
         bubbleUp = Gdx.audio.newSound(Gdx.files.internal("data/audio/bubbleUp.m4a"));
         crash = Gdx.audio.newSound(Gdx.files.internal("data/audio/crash.m4a"));
         ding = Gdx.audio.newSound(Gdx.files.internal("data/audio/littleDing.m4a"));
-
+        backgroundSound = Gdx.audio.newSound(Gdx.files.internal("data/audio/littleDing.m4a"));
         prefs = Gdx.app.getPreferences("HFF");
 
         if (!prefs.contains("highScore")) {
@@ -96,6 +96,7 @@ public class AssetLoader {
         crash.dispose();
         ding.dispose();
         font.dispose();
+        backgroundSound.dispose();
     }
 
 }
