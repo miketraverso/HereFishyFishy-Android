@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.traversoft.hff.HFFWorld.HFFRenderer;
 import com.traversoft.hff.HFFWorld.HFFWorld;
 import com.traversoft.hff.HereFishyFishyMain;
+import com.traversoft.hff.utils.CharacterSelectInputHandler;
 import com.traversoft.hff.utils.InputHandler;
 
 public class GameScreen implements Screen {
@@ -13,6 +14,7 @@ public class GameScreen implements Screen {
 	private HFFRenderer _renderer;
 	private float _runTime = 0.0f;
 	private HereFishyFishyMain _game;
+    private InputHandler _inputHandler;
 
 	public GameScreen(HereFishyFishyMain game) {
 		System.out.println("GameScreen Attached");
@@ -26,17 +28,18 @@ public class GameScreen implements Screen {
         int midPointY = (int) (gameHeight / 2);
 
 		_world = new HFFWorld(midPointY, game);
-		_renderer = new HFFRenderer(_world, (int)	gameHeight, midPointY);
+        _inputHandler = new InputHandler(_world, screenWidth / gameWidth, screenHeight / gameHeight);
+        _renderer = new HFFRenderer(_world, (int)	gameHeight, midPointY);
 	}
 	
 	@Override
-	public void render(float delta) 
-	{
+	public void render(float delta) {
+
 		_runTime += delta;
 		_world.update(delta);
 		_renderer.render(delta);
 		
-        Gdx.input.setInputProcessor(new InputHandler(_world));
+        Gdx.input.setInputProcessor(_inputHandler);
 	}
 
     @Override
