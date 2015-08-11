@@ -134,16 +134,23 @@ gameOver
   orig: 520, 75
   offset: 0, 0
   index: -1
+twitter
+  rotate: false
+  xy: 547, 823
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
 button-dark
   rotate: false
-  xy: 547, 904
+  xy: 1, 617
   size: 238, 119
   orig: 238, 119
   offset: 0, 0
   index: -1
 button-yellow
   rotate: false
-  xy: 1, 617
+  xy: 749, 904
   size: 238, 119
   orig: 238, 119
   offset: 0, 0
@@ -157,231 +164,231 @@ button
   index: -1
 okUp
   rotate: false
-  xy: 787, 910
+  xy: 241, 623
   size: 226, 113
   orig: 226, 113
   offset: 0, 0
   index: -1
 rate
   rotate: false
-  xy: 241, 623
+  xy: 1, 381
   size: 226, 113
   orig: 226, 113
   offset: 0, 0
   index: -1
 share
   rotate: false
-  xy: 1, 381
+  xy: 241, 508
   size: 226, 113
   orig: 226, 113
   offset: 0, 0
   index: -1
 play
   rotate: false
-  xy: 547, 832
+  xy: 749, 832
   size: 239, 70
   orig: 239, 70
   offset: 0, 0
   index: -1
 clown-1
   rotate: false
-  xy: 241, 526
+  xy: 1, 284
   size: 120, 95
   orig: 120, 95
   offset: 0, 0
   index: -1
 clown-dead
   rotate: false
-  xy: 1, 284
+  xy: 1, 187
   size: 120, 95
   orig: 120, 95
   offset: 0, 0
   index: -1
 oldfish-dead
   rotate: false
-  xy: 1, 187
+  xy: 1, 90
   size: 120, 95
   orig: 120, 95
   offset: 0, 0
   index: -1
 oldfish-0
   rotate: false
-  xy: 1, 91
+  xy: 123, 285
   size: 120, 94
   orig: 120, 94
   offset: 0, 0
   index: -1
 oldfish-1
   rotate: false
-  xy: 363, 527
+  xy: 123, 189
   size: 120, 94
   orig: 120, 94
   offset: 0, 0
   index: -1
 fish-0
   rotate: false
-  xy: 123, 286
+  xy: 123, 94
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
+catfish-1
+  rotate: false
+  xy: 123, 1
+  size: 120, 91
+  orig: 120, 91
+  offset: 0, 0
+  index: -1
 fish-1
   rotate: false
-  xy: 123, 191
+  xy: 469, 643
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
 girl-1
   rotate: false
-  xy: 123, 96
-  size: 120, 93
-  orig: 120, 93
-  offset: 0, 0
-  index: -1
-goldfish-0
-  rotate: false
-  xy: 123, 1
+  xy: 469, 548
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
 catfish-0
   rotate: false
-  xy: 788, 818
+  xy: 469, 456
   size: 120, 90
   orig: 120, 90
   offset: 0, 0
   index: -1
-catfish-1
+catfish-dead
   rotate: false
-  xy: 241, 433
-  size: 120, 91
-  orig: 120, 91
+  xy: 241, 416
+  size: 120, 90
+  orig: 120, 90
   offset: 0, 0
   index: -1
-girl-0
+goldfish-0
   rotate: false
-  xy: 363, 433
-  size: 120, 92
-  orig: 120, 92
+  xy: 245, 321
+  size: 120, 93
+  orig: 120, 93
   offset: 0, 0
   index: -1
 red-1
   rotate: false
-  xy: 245, 338
+  xy: 245, 226
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
 super-fish-dead
   rotate: false
-  xy: 245, 243
+  xy: 245, 131
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
 wood-fish-1
   rotate: false
-  xy: 245, 148
+  xy: 245, 36
   size: 120, 93
   orig: 120, 93
   offset: 0, 0
   index: -1
+fish-dead
+  rotate: false
+  xy: 749, 739
+  size: 120, 91
+  orig: 120, 91
+  offset: 0, 0
+  index: -1
+girl-0
+  rotate: false
+  xy: 871, 738
+  size: 120, 92
+  orig: 120, 92
+  offset: 0, 0
+  index: -1
 goldfish-1
   rotate: false
-  xy: 245, 54
+  xy: 591, 729
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
 red-0
   rotate: false
-  xy: 367, 339
+  xy: 591, 635
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
 super-fish-0
   rotate: false
-  xy: 367, 245
+  xy: 591, 541
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
+girl-dead
+  rotate: false
+  xy: 591, 448
+  size: 120, 91
+  orig: 120, 91
+  offset: 0, 0
+  index: -1
 super-fish-1
   rotate: false
-  xy: 367, 151
+  xy: 713, 645
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
 wood-fish-0
   rotate: false
-  xy: 367, 57
+  xy: 713, 551
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
-fish-dead
-  rotate: false
-  xy: 469, 645
-  size: 120, 91
-  orig: 120, 91
-  offset: 0, 0
-  index: -1
-girl-dead
-  rotate: false
-  xy: 485, 552
-  size: 120, 91
-  orig: 120, 91
-  offset: 0, 0
-  index: -1
 goldfish-dead
   rotate: false
-  xy: 485, 459
+  xy: 713, 458
   size: 120, 91
   orig: 120, 91
   offset: 0, 0
   index: -1
 red-dead
   rotate: false
-  xy: 489, 366
+  xy: 835, 645
   size: 120, 91
   orig: 120, 91
   offset: 0, 0
   index: -1
 wood-fish-dead
   rotate: false
-  xy: 489, 273
+  xy: 835, 552
   size: 120, 91
   orig: 120, 91
   offset: 0, 0
   index: -1
-catfish-dead
-  rotate: false
-  xy: 489, 181
-  size: 120, 90
-  orig: 120, 90
-  offset: 0, 0
-  index: -1
 stinky-0
   rotate: false
-  xy: 489, 89
+  xy: 835, 460
   size: 120, 90
   orig: 120, 90
   offset: 0, 0
   index: -1
 stinky-1
   rotate: false
-  xy: 547, 740
+  xy: 713, 366
   size: 120, 90
   orig: 120, 90
   offset: 0, 0
   index: -1
 stinky-dead
   rotate: false
-  xy: 591, 649
+  xy: 835, 369
   size: 120, 89
   orig: 120, 89
   offset: 0, 0
