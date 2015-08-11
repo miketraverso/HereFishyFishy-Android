@@ -48,24 +48,7 @@ public class CharacterSelectScreen implements Screen {
     }
 
     @Override
-    public void show() {
-
-//        _game.setScreen(new GameScreen(_game));
-
-//        sprite = new Sprite(AssetLoader.backgroundSprite);
-//        sprite.setColor(0, 0, 0, 0);
-//
-//        float width = Gdx.graphics.getWidth();
-//        float height = Gdx.graphics.getHeight();
-//        float desiredWidth = width * .7f;
-//        float scale = desiredWidth / sprite.getWidth();
-//
-//        sprite.setSize(sprite.getWidth() * scale, sprite.getHeight() * scale);
-//        sprite.setPosition((width / 2) - (sprite.getWidth() / 2), (height / 2)
-//                - (sprite.getHeight() / 2));
-//        setupTween();
-//        batcher = new SpriteBatch();
-    }
+    public void show() { }
 
     private void setupTween() {
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());

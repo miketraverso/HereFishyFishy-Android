@@ -118,7 +118,6 @@ public class Fishy {
 
     public boolean shouldntFlap() {
 
-        System.out.println("Fishy velocity.y: " + _velocity.y);
         return _velocity.y > 70 || !_isAlive;
     }
 

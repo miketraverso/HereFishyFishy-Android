@@ -2,9 +2,20 @@ package com.traversoft.hff.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
+import com.traversoft.hff.HFFCharacterScreen.HFFCharacterSelectWorld;
 import com.traversoft.hff.HFFWorld.HFFRenderer;
 import com.traversoft.hff.HFFWorld.HFFWorld;
 import com.traversoft.hff.HereFishyFishyMain;
+import com.traversoft.hff.utils.AssetLoader;
 import com.traversoft.hff.utils.CharacterSelectInputHandler;
 import com.traversoft.hff.utils.InputHandler;
 
@@ -16,7 +27,13 @@ public class GameScreen implements Screen {
 	private HereFishyFishyMain _game;
     private InputHandler _inputHandler;
 
-	public GameScreen(HereFishyFishyMain game) {
+    public GameScreen(HereFishyFishyMain game, HFFCharacterSelectWorld.GameState readyOrRun) {
+
+        this(game);
+        _world.setRunning();
+    }
+
+    public GameScreen(HereFishyFishyMain game) {
 		System.out.println("GameScreen Attached");
 
         _game = game;
@@ -30,7 +47,7 @@ public class GameScreen implements Screen {
 		_world = new HFFWorld(midPointY, game);
         _inputHandler = new InputHandler(_world, screenWidth / gameWidth, screenHeight / gameHeight);
         _renderer = new HFFRenderer(_world, (int)	gameHeight, midPointY);
-	}
+    }
 	
 	@Override
 	public void render(float delta) {
@@ -38,7 +55,7 @@ public class GameScreen implements Screen {
 		_runTime += delta;
 		_world.update(delta);
 		_renderer.render(delta);
-		
+
         Gdx.input.setInputProcessor(_inputHandler);
 	}
 
@@ -49,26 +66,33 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+
         System.out.println("GameScreen - show called");
     }
 
     @Override
     public void hide() {
-        System.out.println("GameScreen - hide called");     
+        AssetLoader.backgroundSound.stop();
+        System.out.println("GameScreen - hide called");
     }
 
     @Override
     public void pause() {
-        System.out.println("GameScreen - pause called");        
+
+        AssetLoader.backgroundSound.stop();
+        System.out.println("GameScreen - pause called");
     }
 
     @Override
     public void resume() {
-        System.out.println("GameScreen - resume called");       
+
+        AssetLoader.backgroundSound.play();
+        System.out.println("GameScreen - resume called");
     }
 
     @Override
     public void dispose() {
         // Leave blank
+        AssetLoader.backgroundSound.stop();
     }
 }

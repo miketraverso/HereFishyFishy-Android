@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.traversoft.hff.GameObjects.Fishy;
 import com.traversoft.hff.GameObjects.ScrollingBackgroundHandler;
 import com.traversoft.hff.HereFishyFishyMain;
+import com.traversoft.hff.utils.AssetLoader;
 
 public class HFFWorld {
 
@@ -44,9 +45,11 @@ public class HFFWorld {
                 updateReady(delta);
                 break;
             case GAMEOVER:
+                AssetLoader.backgroundSound.stop();
                 break;
             case RUNNING:
             default:
+                AssetLoader.backgroundSound.play();
                 updateRunning(delta);
                 break;
 
@@ -153,16 +156,21 @@ public class HFFWorld {
         return _currentState == GameState.RUNNING;
     }
 
+    public void setRunning () {
+
+        _currentState = GameState.RUNNING;
+    }
+
     public void start () {
 
         _currentState = GameState.RUNNING;
     }
 
-    public void restart () {
+    public void restart (GameState runOrReady) {
         _currentState = GameState.READY;
         _score = 0;
         _fishy.onRestart(33, _midPointY - 150);
         _scroller.onRestart();
-        _currentState = GameState.READY;
+        _currentState = runOrReady;
     }
 }

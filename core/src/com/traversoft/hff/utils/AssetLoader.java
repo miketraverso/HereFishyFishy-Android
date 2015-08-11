@@ -3,8 +3,7 @@ package com.traversoft.hff.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,10 +14,9 @@ import com.traversoft.hff.HFFCharacterScreen.HFFCharacterSelectWorld;
 
 public class AssetLoader {
 
-    public static Texture texture;
     public static Sprite seafloorSprite, backgroundSprite;
     public static TextureAtlas atlas;
-    public static BitmapFont font, yellow_font;
+    public static BitmapFont font, font_small, font_smallest, yellow_font, yellow_font_small;
     public static TextureRegion topSeaweedTexture, bottomSeaweedTexture;
 
     public static Animation selectedFishAnimation;
@@ -38,11 +36,13 @@ public class AssetLoader {
     public static Sprite oldFlapUpTexture, oldFlapDownTexture, oldDeadSprite;
     public static Sprite goldFlapUpTexture, goldFlapDownTexture, goldDeadSprite;
 
-    public static Sound dead, bubbleUp, crash, gameOver, backgroundSound, ding;
+    public static Sound dead, bubbleUp, crash, ding;
+    public static Music backgroundSound;
     public static Sprite titleFancy, tapToPlay, scorecard;
     public static Preferences prefs;
     public static Sprite leftButtonUpSprite, rightButtonUpSprite, leftButtonDownSprite, rightButtonDownSprite;
-    public static Sprite okButtonUpSprite, okButtonDownSprite, buttonUpSprite, buttonDownSprite;
+    public static Sprite okButtonUpSprite, okButtonDownSprite;
+    public static TextureRegion buttonUpSprite, buttonDownSprite;
 
     public static void load() {
 
@@ -51,8 +51,20 @@ public class AssetLoader {
                               false);
         font.getData().setScale(.30f, -.30f);
 
-        yellow_font = new BitmapFont(Gdx.files.internal("data/font/font-yellow.fnt"));
+        font_small = new BitmapFont(Gdx.files.internal("data/font/font.fnt"),
+                Gdx.files.internal("data/font/font-white.png"),
+                false);
+        font_small.getData().setScale(.25f, -.25f);
+
+        font_smallest = new BitmapFont(Gdx.files.internal("data/font/font.fnt"),
+                Gdx.files.internal("data/font/font-white.png"),
+                false);
+        font_smallest.getData().setScale(.20f, -.20f);
+
+                yellow_font = new BitmapFont(Gdx.files.internal("data/font/font-yellow.fnt"));
         yellow_font.getData().setScale(.30f, -.30f);
+        yellow_font_small = new BitmapFont(Gdx.files.internal("data/font/font-yellow.fnt"));
+        yellow_font_small.getData().setScale(.25f, -.25f);
 
         atlas = new TextureAtlas(Gdx.files.internal("data/textures/fish.pack"));
         seafloorSprite = atlas.createSprite("foreground");
@@ -111,7 +123,9 @@ public class AssetLoader {
         bubbleUp = Gdx.audio.newSound(Gdx.files.internal("data/audio/bubbleUp.m4a"));
         crash = Gdx.audio.newSound(Gdx.files.internal("data/audio/crash.m4a"));
         ding = Gdx.audio.newSound(Gdx.files.internal("data/audio/littleDing.m4a"));
-        backgroundSound = Gdx.audio.newSound(Gdx.files.internal("data/audio/backgroundLoop.m4a"));
+        backgroundSound = Gdx.audio.newMusic(Gdx.files.internal("data/audio/backgroundLoop.wav"));
+        backgroundSound.setLooping(true);
+
         prefs = Gdx.app.getPreferences("HFF");
 
         if (!prefs.contains("highScore")) {
@@ -144,10 +158,10 @@ public class AssetLoader {
                 break;
 
             case CLOWN_FISH:
-                selectedFishAnimation = swedishFlapAnimation;
-                selectedFishDeadTexture = swedishDeadSprite;
-                selectedFishFlapDownTexture = swedishFlapDownTexture;
-                selectedFishFlapUpTexture = swedishFlapUpTexture;
+                selectedFishAnimation = clownFlapAnimation;
+                selectedFishDeadTexture = clownDeadSprite;
+                selectedFishFlapDownTexture = clownFlapDownTexture;
+                selectedFishFlapUpTexture = clownFlapUpTexture;
                 break;
 
             case STINKY_FISH:
@@ -251,11 +265,11 @@ public class AssetLoader {
 
     private static void initClownFishSprite() {
 
-        clownFlapDownTexture = atlas.createSprite("red-0");
+        clownFlapDownTexture = atlas.createSprite("clown-0");
         clownFlapDownTexture.flip(false, true);
-        clownFlapUpTexture = atlas.createSprite("red-1");
+        clownFlapUpTexture = atlas.createSprite("clown-1");
         clownFlapUpTexture.flip(false, true);
-        clownDeadSprite = atlas.createSprite("red-dead");
+        clownDeadSprite = atlas.createSprite("clown-dead");
         clownDeadSprite.flip(false, true);
 
         TextureRegion[] fishys = { clownFlapUpTexture, clownFlapDownTexture };
@@ -349,13 +363,16 @@ public class AssetLoader {
 
     public static void dispose() {
 
-        texture.dispose();
         atlas.dispose();
         dead.dispose();
         bubbleUp.dispose();
         crash.dispose();
         ding.dispose();
         font.dispose();
+        font_small.dispose();
+        font_smallest.dispose();
+        yellow_font.dispose();
+        yellow_font_small.dispose();
         backgroundSound.dispose();
     }
 

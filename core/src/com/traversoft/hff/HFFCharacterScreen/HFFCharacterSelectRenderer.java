@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -106,6 +107,59 @@ public class HFFCharacterSelectRenderer {
             button.draw(_batcher);
         }
 
+        GlyphLayout glyphLayout = new GlyphLayout();
+        glyphLayout.setText(AssetLoader.font,"CHOOSE");
+        float w = glyphLayout.width;
+        AssetLoader.font.draw(_batcher, "CHOOSE", (136 - w)/2, 30);
+
+        glyphLayout.setText(AssetLoader.font,"YOUR");
+        w = glyphLayout.width;
+        AssetLoader.font.draw(_batcher, "YOUR", (136 - w)/2, 45);
+
+        glyphLayout.setText(AssetLoader.font,"FISHY");
+        w = glyphLayout.width;
+        AssetLoader.font.draw(_batcher, "FISHY", (136 - w)/2, 60);
+
+        String fishName = "";
+        switch (HFFCharacterSelectWorld.getSelectedFish()) {
+            case GIRL_FISH:
+                fishName = "GIRLIE FISH";
+                break;
+            case CLOWN_FISH:
+                fishName = "CLOWNIE FISH";
+                break;
+            case STINKY_FISH:
+                fishName = "STINKY FISH";
+                break;
+            case SWEDISH_FISH:
+                fishName = "SWEDISH FISHY";
+                break;
+            case SUPER_FISH:
+                fishName = "SUPER FISHY";
+                break;
+            case WOOD_FISH:
+                fishName = "WOODY FISH";
+                break;
+            case GOLD_FISH:
+                fishName = "GOLDIE FISH";
+                break;
+            case OLD_FISH:
+                fishName = "OLDIE FISH";
+                break;
+            case CAT_FISH:
+                fishName = "CAT FISHY";
+                break;
+            case FISHY:
+            default:
+                fishName = "FISHY FISHY";
+                break;
+        }
+
+        glyphLayout = new GlyphLayout();
+        glyphLayout.setText(AssetLoader.yellow_font_small,fishName);
+        w = glyphLayout.width;
+        AssetLoader.yellow_font_small.draw(_batcher, fishName, (136 - w)/2, _midPointY + 75);
+
         _batcher.end();
     }
 
@@ -132,18 +186,5 @@ public class HFFCharacterSelectRenderer {
                 _seaweedRight.getY() + _seaweedRight.getHeight() + Seaweed.VERTICAL_GAP,
                 _seaweedRight.getWidth(),
                 _midPointY + 66 - (_seaweedRight.getHeight() + Seaweed.VERTICAL_GAP));
-
-//        _batcher.draw(_seaweedTexture,
-//                _seaweedLeft.getX(),
-//                _seaweedLeft.getY(),
-//                _seaweedLeft.getWidth(),
-//                _seaweedLeft.getHeight());
-//
-//
-//        _batcher.draw(_seaweedTexture,
-//                _seaweedRight.getX(),
-//                _seaweedRight.getY(),
-//                _seaweedRight.getWidth(),
-//                _seaweedRight.getHeight());
     }
 }

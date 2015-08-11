@@ -5,10 +5,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.traversoft.hff.GameObjects.Button;
 import com.traversoft.hff.GameObjects.Fishy;
 import com.traversoft.hff.GameObjects.ScrollingBackgroundHandler;
@@ -43,10 +49,9 @@ public class HFFRenderer {
     private TextureRegion _fishyFlapDownTexture, _fishyFlapUpTexture, _deadFishyTexture, _bottomSeaweedTexture, _topSeaweedTexture;
 
     private Sprite _titleFancy, _tapToPlay, _scorecard;
-    private boolean isGameOverEvaluated = false;
-    private List<Button> _buttons;
+    private List<Button> _buttons, _endGameButtons;
 
-	public HFFRenderer(HFFWorld world, int gameHeight, int midPointY)
+    public HFFRenderer(HFFWorld world, int gameHeight, int midPointY)
 	{
 		_world = world;
 		_gameHeight = gameHeight;
@@ -61,6 +66,7 @@ public class HFFRenderer {
 		_shapeRenderer.setProjectionMatrix(_camera.combined);
 
         _buttons = InputHandler.initButtons(midPointY);
+        _endGameButtons = InputHandler.initEndGameButtons(midPointY);
 
 		initGameObjects();
 		initAssets();
@@ -91,8 +97,7 @@ public class HFFRenderer {
         _scorecard = AssetLoader.scorecard;
     }
 
-	public void render(float runTime) {		
-
+	public void render(float runTime) {
 
 		// Fill the entire screen with black, to prevent potential flickering.
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -111,7 +116,7 @@ public class HFFRenderer {
         _batcher.enableBlending();
         if (!_fishy.shouldntFlap())  {
 
-            System.out.println("Shouldn't flap");
+//            System.out.println("Shouldn't flap");
 
             _batcher.draw(_fishyFlapAnimation.getKeyFrame(runTime),
                     _fishy.getX(),
@@ -123,12 +128,10 @@ public class HFFRenderer {
                     1,
                     1,
                     _fishy.getRotation());
-        	// Draw bird at its coordinates. Retrieve the Animation object from AssetLoader
-        	// Pass in the runTime variable to get the current frame.
         }
         else if (!_fishy.isAlive()) {
 
-            System.out.println("Shouldn't be dead");
+//            System.out.println("Shouldn't be dead");
             _batcher.draw(_deadFishyTexture,
                     _fishy.getX(), _fishy.getY(),
                     _fishy.getWidth() / 2.0f, _fishy.getHeight() / 2.0f,
@@ -136,7 +139,7 @@ public class HFFRenderer {
         }
         else {
 
-            System.out.println("Should flap");
+//            System.out.println("Should flap");
             _batcher.draw(_fishyFlapDownTexture,
                     _fishy.getX(), _fishy.getY(),
                     _fishy.getWidth() / 2.0f, _fishy.getHeight() / 2.0f,
@@ -146,60 +149,13 @@ public class HFFRenderer {
 
         if (_world.isReady()) {
 
-            _batcher.draw(_titleFancy, 18, 20, 100, 85);
-            _batcher.draw(_tapToPlay,  18, 10 + 20 + 85, 100, 12);
-
-            for (Button button : _buttons) {
-                button.draw(_batcher);
-            }
-
-            _batcher.draw(_fishyFlapDownTexture,
-                    136 / 2 - 14,
-                    _midPointY + 44,
-                    14, 11,
-                    28, 22, 1, 1, _fishy.getRotation());
+            drawTitle();
         }
         else if (_world.isGameOver()) {
 
-            String score = String.format("%d", _world.getScore());
-            BitmapFont font;
-            if (_world.isNewHighScore()) {
-                font = AssetLoader.yellow_font;
-            }
-            else {
-                font = AssetLoader.font;
-            }
+            drawButtonsForEndGame();
 
-            _batcher.draw(_scorecard, 8, 33, 120, 50);
-            if (score.length() < 3) {
-                AssetLoader.font.draw(_batcher, score, (136 / 4) - (4 * score.length()), 55);
-            }
-            else if (score.length() >= 3) {
-                AssetLoader.font.draw(_batcher, score, (136 / 4) - (5 * score.length()), 55);
-            }
-
-            String highScore = String.format("%d", _world.getHighScore());
-            boolean isNewHighScore = _world.getScore() > _world.getHighScore();
-            if (isNewHighScore) {
-
-                _world.setHighScore(_world.getScore());
-            }
-
-            if (highScore.length() < 2) {
-
-                font.draw(_batcher, highScore, (136 / 8 * 5) + (3 * highScore.length()), 55);
-            }
-            else if (highScore.length() == 2) {
-
-                font.draw(_batcher, highScore, (136 / 8 * 5) + (1 * highScore.length()), 55);
-            }
-            else if (highScore.length() == 3) {
-
-                font.draw(_batcher, highScore, (136 / 8 * 5) - (2 * highScore.length()), 55);
-            }
-            else {
-                font.draw(_batcher, highScore, (136 / 8 * 5) - (3 * highScore.length()), 55);
-            }
+            drawScoreboard();
         }
         else {
 
@@ -209,7 +165,92 @@ public class HFFRenderer {
 
         _batcher.end();
     }
-	
+
+    private void drawTitle() {
+        _batcher.draw(_titleFancy, 18, 20, 100, 85);
+        _batcher.draw(_tapToPlay,  18, 10 + 20 + 85, 100, 12);
+
+        for (Button button : _buttons) {
+            button.draw(_batcher);
+        }
+
+        _batcher.draw(_fishyFlapDownTexture,
+                136 / 2 - 14,
+                _midPointY + 44,
+                14, 11,
+                28, 22, 1, 1, _fishy.getRotation());
+    }
+
+    private void drawScoreboard() {
+        String score = String.format("%d", _world.getScore());
+        BitmapFont font;
+        if (_world.isNewHighScore()) {
+            font = AssetLoader.yellow_font;
+        }
+        else {
+            font = AssetLoader.font;
+        }
+
+        _batcher.draw(_scorecard, 8, 33, 120, 50);
+        if (score.length() < 3) {
+            AssetLoader.font.draw(_batcher, score, (136 / 4) - (4 * score.length()), 55);
+        }
+        else if (score.length() >= 3) {
+            AssetLoader.font.draw(_batcher, score, (136 / 4) - (5 * score.length()), 55);
+        }
+
+        String highScore = String.format("%d", _world.getHighScore());
+        boolean isNewHighScore = _world.getScore() > _world.getHighScore();
+        if (isNewHighScore) {
+
+            _world.setHighScore(_world.getScore());
+        }
+
+        if (highScore.length() < 2) {
+
+            font.draw(_batcher, highScore, (136 / 8 * 5) + (3 * highScore.length()), 55);
+        }
+        else if (highScore.length() == 2) {
+
+            font.draw(_batcher, highScore, (136 / 8 * 5) + (1 * highScore.length()), 55);
+        }
+        else if (highScore.length() == 3) {
+
+            font.draw(_batcher, highScore, (136 / 8 * 5) - (2 * highScore.length()), 55);
+        }
+        else {
+            font.draw(_batcher, highScore, (136 / 8 * 5) - (3 * highScore.length()), 55);
+        }
+    }
+
+    private void drawButtonsForEndGame () {
+
+        for (Button button : _endGameButtons) {
+            button.draw(_batcher);
+        }
+
+        _batcher.draw(AssetLoader.selectedFishFlapDownTexture,
+                23,
+                _midPointY - 15,
+                _fishy.getWidth() / 2.0f,
+                _fishy.getHeight() / 2.0f,
+                _fishy.getWidth(),
+                _fishy.getHeight(),
+                1,
+                1,
+                0);
+
+        GlyphLayout glyphLayout = new GlyphLayout();
+        glyphLayout.setText(AssetLoader.font_smallest,"SHARE");
+        float w = glyphLayout.width;
+        AssetLoader.font_smallest.draw(_batcher, "SHARE", 136 / 2 + 12, _midPointY - 10);
+
+        glyphLayout = new GlyphLayout();
+        glyphLayout.setText(AssetLoader.yellow_font_small,"PLAY AGAIN");
+        w = glyphLayout.width;
+        AssetLoader.yellow_font_small.draw(_batcher, "PLAY AGAIN", (136 - w)/2, _midPointY + 28);
+    }
+
 	private void drawForeground() {
 
         _batcher.draw(_seaFloorSprite,

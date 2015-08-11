@@ -2,9 +2,17 @@ package com.traversoft.hff;
 
 import com.badlogic.gdx.Game;
 import com.traversoft.hff.Screens.GameScreen;
+import com.traversoft.hff.utils.ActionResolver;
 import com.traversoft.hff.utils.AssetLoader;
 
 public class HereFishyFishyMain extends Game {
+
+	ActionResolver _actionResolver;
+
+	public HereFishyFishyMain(ActionResolver actionResolver) {
+
+		_actionResolver = actionResolver;
+	}
 
 	@Override
 	public void create() {
@@ -20,24 +28,14 @@ public class HereFishyFishyMain extends Game {
 		super.dispose();
 		AssetLoader.dispose();
 	}
-}
 
-//		extends ApplicationAdapter {
-//	SpriteBatch batch;
-//	Texture img;
+//	public void x () {
 //
-//	@Override
-//	public void create () {
-//		batch = new SpriteBatch();
-//		img = new Texture("badlogic.jpg");
+//		_actionResolver.showAlertBox("!AlertBox title", "!AlertBox message", "Button text");
 //	}
-//
-//	@Override
-//	public void render () {
-//		Gdx.gl.glClearColor(1, 0, 0, 1);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//		batch.begin();
-//		batch.draw(img, 0, 0);
-//		batch.end();
-//	}
-//}
+
+	public void launchIntent (String msg, String imgUri) {
+
+		_actionResolver.launchIntent(msg, imgUri);
+	}
+}

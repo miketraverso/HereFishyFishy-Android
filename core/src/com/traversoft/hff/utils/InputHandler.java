@@ -4,21 +4,17 @@ import com.badlogic.gdx.InputProcessor;
 import com.traversoft.hff.GameObjects.Button;
 import com.traversoft.hff.GameObjects.Fishy;
 import com.traversoft.hff.HFFCharacterScreen.CharacterSelectScreen;
-import com.traversoft.hff.HFFCharacterScreen.HFFCharacterSelectWorld;
 import com.traversoft.hff.HFFWorld.HFFWorld;
-import com.traversoft.hff.Screens.GameScreen;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputHandler implements InputProcessor
-{
+public class InputHandler implements InputProcessor {
+
 	private Fishy _fishy;
 	private HFFWorld _world;
 	private float _scaleFactorX;
 	private float _scaleFactorY;
-	private List<Button> buttons;
-	private static Button fishSelectButton;
+	private static Button btnTitleSelectFish, btnPlayAgain, btnEndGameSelectFish, btnShareScore;
 
 	public InputHandler(HFFWorld world,
 						float scaleFactorX,
@@ -32,17 +28,49 @@ public class InputHandler implements InputProcessor
 	public static List<Button> initButtons(int midPointY) {
 
 		List<Button> buttons = new ArrayList<Button>();
-		fishSelectButton = new Button(136 / 2 - 20,
+		btnTitleSelectFish = new Button(136 / 2 - 20,
 				midPointY + 40,
 				40,
 				30,
 				AssetLoader.buttonUpSprite,
 				AssetLoader.buttonDownSprite);
 
-		buttons.add(fishSelectButton);
+		buttons.add(btnTitleSelectFish);
 
 		return buttons;
 	}
+
+	public static List<Button> initEndGameButtons(int midPointY) {
+
+		List<Button> buttons = new ArrayList<Button>();
+		btnEndGameSelectFish = new Button(8,
+				midPointY - 20,
+				54,
+				30,
+				AssetLoader.buttonUpSprite,
+				AssetLoader.buttonDownSprite);
+
+        btnShareScore = new Button(136 / 2 + 6,
+				midPointY - 20,
+				54,
+				30,
+				AssetLoader.buttonUpSprite,
+				AssetLoader.buttonDownSprite);
+
+        btnPlayAgain = new Button(136 / 2 - 50,
+				midPointY + 20,
+				100,
+				30,
+				AssetLoader.buttonUpSprite,
+				AssetLoader.buttonDownSprite);
+
+		buttons.add(btnPlayAgain);
+		buttons.add(btnEndGameSelectFish);
+		buttons.add(btnShareScore);
+
+		return buttons;
+	}
+
 
 	@Override
 	public boolean keyDown(int keycode) {
@@ -65,12 +93,12 @@ public class InputHandler implements InputProcessor
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
+		screenX = scaleX(screenX);
+		screenY = scaleY(screenY);
+
 		if (_world.isReady()) {
 
-			screenX = scaleX(screenX);
-			screenY = scaleY(screenY);
-
-			if (!fishSelectButton.isTouchDown(screenX, screenY)) {
+			if (!btnTitleSelectFish.isTouchDown(screenX, screenY)) {
 
 				_world.start();
 			}
@@ -80,7 +108,9 @@ public class InputHandler implements InputProcessor
 
 		if (_world.isGameOver()) {
 
-			_world.restart();
+            btnEndGameSelectFish.isTouchDown(screenX, screenY);
+            btnPlayAgain.isTouchDown(screenX, screenY);
+            btnShareScore.isTouchDown(screenX,screenY);
 		}
 
 		return true;
@@ -92,11 +122,29 @@ public class InputHandler implements InputProcessor
 		screenX = scaleX(screenX);
 		screenY = scaleY(screenY);
 
-		if (fishSelectButton.isTouchUp(screenX, screenY)) {
+		if (btnTitleSelectFish.isTouchUp(screenX, screenY)) {
 
 			_world.getGame().setScreen(new CharacterSelectScreen(_world.getGame()));
 			return true;
 		}
+
+   		if (_world.isGameOver()) {
+
+            if (btnEndGameSelectFish.isTouchUp(screenX, screenY)) {
+
+                _world.getGame().setScreen(new CharacterSelectScreen(_world.getGame()));
+            }
+            else if (btnShareScore.isTouchUp(screenX, screenY)) {
+
+                ScreenshotFactory.saveScreenshot();
+                String path = ScreenshotFactory.getScreenshotPath();
+                _world.getGame().launchIntent("WooHOO! I scored " + _world.getScore() + " points in Here Fishy Fishy!", path);
+            }
+            else if (btnPlayAgain.isTouchUp(screenX, screenY)) {
+
+                _world.restart(HFFWorld.GameState.RUNNING);
+            }
+        }
 
 		return false;
 	}

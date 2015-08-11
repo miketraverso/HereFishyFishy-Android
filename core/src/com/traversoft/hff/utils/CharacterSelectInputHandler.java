@@ -134,7 +134,7 @@ public class CharacterSelectInputHandler implements InputProcessor {
         }
         else if (okButton.isTouchUp(screenX, screenY)) {
 
-            _world.getGame().setScreen(new GameScreen(_world.getGame()));
+            _world.getGame().setScreen(new GameScreen(_world.getGame(), HFFCharacterSelectWorld.GameState.RUNNING));
             return true;
         }
 
